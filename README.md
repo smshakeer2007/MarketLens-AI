@@ -205,6 +205,27 @@ Open `http://localhost:5173` in your browser.
 
 ---
 
+## 🌐 Cloud & GitHub Hosting Guide
+
+### Method 1: Host Frontend on GitHub Pages (Free & Automated)
+The repository includes an automated GitHub Actions workflow (`.github/workflows/deploy.yml`):
+1. Go to your repository on GitHub: **`https://github.com/smshakeer2007/MarketLens-AI`**
+2. Click **Settings** (tab at top) -> **Pages** (in left sidebar).
+3. Under **Build and deployment > Source**, select **GitHub Actions**.
+4. That's it! GitHub will automatically build and publish your frontend to:
+   ```text
+   https://smshakeer2007.github.io/MarketLens-AI/
+   ```
+
+### Method 2: 1-Click Full-Stack Hosting on Render (Free)
+The repository includes a ready-to-use [`render.yaml`](render.yaml) blueprint:
+1. Create a free account at [Render.com](https://render.com) using your GitHub account.
+2. Click **New +** -> **Blueprint**.
+3. Connect your repository `smshakeer2007/MarketLens-AI`.
+4. Click **Apply**: Render will automatically launch both the Python FastAPI backend and the React frontend with a live public URL!
+
+---
+
 ## 🧪 Testing Suite
 
 ### Backend Unit & Integration Tests (27 Tests)
