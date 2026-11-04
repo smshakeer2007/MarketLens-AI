@@ -47,8 +47,10 @@ export const useLiveTicker = (
       // Determine ws protocol and host
       const isHttps = window.location.protocol === 'https:';
       const wsProtocol = isHttps ? 'wss:' : 'ws:';
-      // In dev backend runs on port 8000
-      const wsHost = import.meta.env.VITE_WS_URL || '127.0.0.1:8000';
+      // In dev backend runs on port 8000, in prod uses live Render backend
+      const wsHost =
+        import.meta.env.VITE_WS_URL ||
+        (import.meta.env.DEV ? '127.0.0.1:8000' : 'marketlens-backend-abv8.onrender.com');
       const wsUrl = `${wsProtocol}//${wsHost}/api/v1/stocks/${encodeURIComponent(ticker)}/live-ws`;
 
       try {
