@@ -86,14 +86,27 @@ export const StockDetailPage: React.FC = () => {
       
       {/* Loading Skeleton State */}
       {isLoading && (
-        <div className="space-y-6 animate-pulse">
-          <div className="h-40 bg-slate-200 dark:bg-fintech-card rounded-2xl w-full" />
-          <div className="h-10 bg-slate-200 dark:bg-fintech-card rounded-xl w-72" />
-          <div className="h-[480px] bg-slate-200 dark:bg-fintech-card rounded-2xl w-full" />
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="h-32 bg-slate-200 dark:bg-fintech-card rounded-2xl" />
-            ))}
+        <div className="space-y-6">
+          <div className="bg-blue-900/30 border border-blue-500/30 rounded-2xl p-4 flex items-center justify-between text-blue-200 text-sm">
+            <div className="flex items-center space-x-3">
+              <RefreshCw className="w-5 h-5 animate-spin text-blue-400 shrink-0" />
+              <div>
+                <span className="font-semibold">Loading live market data for {ticker}...</span>
+                <p className="text-xs text-blue-300/80 mt-0.5">
+                  Connecting to cloud server. If waking from idle, please allow ~30 seconds.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="space-y-6 animate-pulse">
+            <div className="h-40 bg-slate-200 dark:bg-fintech-card rounded-2xl w-full" />
+            <div className="h-10 bg-slate-200 dark:bg-fintech-card rounded-xl w-72" />
+            <div className="h-[480px] bg-slate-200 dark:bg-fintech-card rounded-2xl w-full" />
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="h-32 bg-slate-200 dark:bg-fintech-card rounded-2xl" />
+              ))}
+            </div>
           </div>
         </div>
       )}

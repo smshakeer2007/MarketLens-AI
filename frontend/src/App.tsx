@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from './context/ThemeContext';
@@ -9,17 +9,25 @@ import { MethodologyPage } from './pages/MethodologyPage';
 import { ComparePage } from './pages/ComparePage';
 import { BacktestPage } from './pages/BacktestPage';
 import { WatchlistPage } from './pages/WatchlistPage';
+import { pingBackend } from './api/client';
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
       staleTime: 60 * 1000,
+      retry: 3, // Retry up to 3 times on cold start
+      retryDelay: (attempt) => Math.min(attempt * 3000, 10000), // Exponential backoff for cold starts
     },
   },
 });
 
 export const App: React.FC = () => {
+  useEffect(() => {
+    // Proactively ping cloud backend on initial app load to trigger wake-up
+    pingBackend();
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>

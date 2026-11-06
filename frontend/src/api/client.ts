@@ -20,11 +20,21 @@ const API_BASE_URL =
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 25000,
+  timeout: 90000, // 90 seconds to allow Render cold start spin-up
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+export const pingBackend = async (): Promise<boolean> => {
+  try {
+    const rootUrl = API_BASE_URL.replace(/\/api\/v1\/?$/, '');
+    await axios.get(`${rootUrl}/health`, { timeout: 15000 });
+    return true;
+  } catch {
+    return false;
+  }
+};
 
 export const searchStocks = async (query: string): Promise<StockSearchItem[]> => {
   if (!query || query.trim().length === 0) return [];
